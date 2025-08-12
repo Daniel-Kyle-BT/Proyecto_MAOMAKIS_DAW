@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio</title>
+    <link rel="stylesheet" th:href="@{/css/estilos.css}">
+</head>
+<body>
+<header>
+    <nav>
+        <ul>
+            <li><a th:href="@{/}">Inicio</a></li>
+			<li><a th:href="@{/privado/empleado}">Empleado</a></li>
+            <!-- Mostrar solo si NO está autenticado -->
+            <li sec:authorize="!isAuthenticated()">
+                <a th:href="@{/login}">Iniciar sesión</a>
+            </li>
+
+            <!-- Mostrar solo si está autenticado -->
+            <li sec:authorize="isAuthenticated()">
+                <span sec:authentication="name"></span>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{/logout}">Cerrar sesión</a>
+            </li>
+        </ul>
+    </nav>
+	
+</header>
+
+<main>
+    <h1>Bienvenido a la aplicación</h1>
+    <p>Este es el índice público.</p>
+</main>
+
+<footer>
+    <p>&copy; 2025 - Mi Aplicación</p>
+</footer>
+</body>
+</html>

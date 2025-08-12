@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Formulario de Inicio de Sesión</title>
+	<!-- Incluye Boxicons desde CDN -->
+	<link rel="stylesheet" th:href="@{/css/login.css}">
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
+</head>
+
+<body>
+	<div class="wrapper">
+	    <span class="bg-animate"></span>
+	    <span class="bg-animate2"></span>
+	    <div class="form-box login"> 
+	        <h2 class="animation" style="--i:0; --j:21;">login</h2>
+	        <form th:action="@{/login}" method="post">
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+	            <div class="input-box animation" style="--i:1; --j:22;">
+	                <input type="text" id="usuario" name="username" required/>
+	                <label for="usuario">Usuario</label>
+	                <i class='bx bxs-user'></i>
+	            </div>
+	            <div class="input-box animation" style="--i:2; --j:23;">
+	                <input type="password" id="contrasena" name="password" required/>
+	                <label for="contrasena">Contraseña</label>
+	                <i class='bx bxs-lock-alt'></i>               
+	            </div>
+	            <button type="submit" class="btn animation" style="--i:3; --j:24;">Iniciar Session</button>
+	            <div class="logreg-link animation" style="--i:4; --j:25;">
+	                <p>¿No tienes una cuenta? <a href="#" class="register-link">Regístrate</a></p>
+					<div th:if="${param.error}">
+						<p style="color:red;">Usuario o contraseña incorrectos</p>
+					</div>
+					<div th:if="${param.logout}">
+						<p style="color:green;">Sesión cerrada</p>
+					</div>
+	            </div>	
+	        </form>
+	    </div>
+	    <div class="info-text login">
+	        <h2 class="animation" style="--i:0; --j:20;">Welcome Back</h2>
+	        <p class="animation" style="--i:1; --j:21;">Nuevas promociones y ofertas te esperan al alcance de un click</p>
+	    </div>
+	    <div class="form-box register"> 
+	        <h2 class="animation" style="--i:17; --j:0;">Sing Up</h2>
+	        <form th:action="@{/registrar}" th:object="${usuario}"  method="POST">
+	            <div class="input-box animation" style="--i:18; --j:1;">
+	                <input type="text" id="usuario_reg" name="username" th:field="*{username}" required/>
+	                <label for="usuario_reg">Usuario</label>
+	                <i class='bx bxs-user'></i>
+	            </div>
+	            <div class="input-box animation" style="--i:19; --j:2;">
+	                <input type="text" id="email_reg" name="email" th:field="*{correo}" required/>
+	                <label for="email_reg">Email</label>
+	                <i class='bx bxs-envelope'></i>
+	            </div>
+	            <div class="input-box animation" style="--i:20; --j:3;">
+	                <input type="password" id="contrasena" name="password" th:field="*{password}" required/>
+	                <label for="contrasena">Contraseña</label>
+	                <i class='bx bxs-lock-alt'></i>               
+	            </div>
+	            <button type="submit" class="btn animation" style="--i:21; --j:4;">Registrar</button>
+	            <div class="logreg-link animation" style="--i:22; --j:5;">
+	                <p>¿Ya tienes una cuenta? <a href="#" class="login-link">Inicia Session</a></p>
+	            </div>
+	        </form>
+	    </div>
+	    <div class="info-text register">
+	        <h2 class="animation" style="--i:17; --j:0;">Únete a nosotros</h2>
+	        <p class="animation" style="--i:18; --j:1;">Y disfrutar de las ofertas exclusivas para nuestros usuarios</p>
+	    </div>
+	</div>
+
+		
+	<script th:src="@{/js/login.js}"></script>
+	<a th:href="@{/}">inicio</a>
+
+</body>
+
+</html>
+
+	
