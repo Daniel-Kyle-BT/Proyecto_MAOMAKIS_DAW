@@ -1,15 +1,15 @@
 package com.cibertec.security.service;
 
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
 import com.cibertec.security.entity.Usuario;
 
+import java.util.List;
+import java.util.Optional;
+
 public interface UsuarioService {
-	
-    Usuario buscarPorUsername(String username);
+
+    Optional<Usuario> buscarPorUsername(String username);
     
-    UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
+    Usuario registrarUsuario(Usuario usuario);
     
-    void registrarUsuario(Usuario usuario);
+    List<Usuario> listarUsuarios();
 }

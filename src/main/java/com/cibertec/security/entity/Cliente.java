@@ -2,14 +2,13 @@ package com.cibertec.security.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,6 +17,7 @@ import java.time.LocalDateTime;
 
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "cliente")
 public class Cliente {
@@ -25,7 +25,11 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_cliente")
+    @EqualsAndHashCode.Include
     private Long id;
+    
+    @Column(name = "codigo", nullable = false, columnDefinition = "CHAR(6)")
+    private String codigo;
 
     @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
@@ -37,16 +41,8 @@ public class Cliente {
     private String telefono;
 
     @Column(name = "fecha_registro")
-    private LocalDateTime fechaRegistro = LocalDateTime.now();
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "canal_preferencia", length = 20)
-    private CanalPreferencia canalPreferencia = CanalPreferencia.Tienda;
+    private LocalDateTime fechaRegistro;
 
     @Column(name = "estado")
     private Boolean estado = true;
-
-    public enum CanalPreferencia {
-        WhatsApp, Llamada, Redes_Sociales, Tienda
-    }
 }

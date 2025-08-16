@@ -1,15 +1,14 @@
 package com.cibertec.security.repository;
 
-import com.cibertec.security.entity.Usuario;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-
 import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.cibertec.security.entity.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-    @Query("SELECT u FROM Usuario u JOIN FETCH u.rol WHERE u.username = :username")
-    Optional<Usuario> findByUsername(@Param("username") String username);
+    Optional<Usuario> findByUsername(String username);
+    boolean existsByUsername(String username);
 
 }

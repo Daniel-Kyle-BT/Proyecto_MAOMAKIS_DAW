@@ -14,16 +14,15 @@ import lombok.Setter;
 @NoArgsConstructor @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Embeddable
-public class CarritoId {
-	
+public class DetallePedidoId {
+
     @ManyToOne
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "id_pedido")
     @EqualsAndHashCode.Include
-    private Usuario usuario;
+    private Pedido pedido;
 
     @ManyToOne
     @JoinColumn(name = "id_platillo")
     @EqualsAndHashCode.Include
     private Menu menu;
-
 }

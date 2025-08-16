@@ -10,12 +10,14 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter @Setter
 @NoArgsConstructor @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "empleado")
 public class Empleado {
@@ -23,9 +25,10 @@ public class Empleado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_empleado")
+    @EqualsAndHashCode.Include
     private Long id;
 
-    @Column(name = "codigo", nullable = false, columnDefinition = "CHAR(8)")
+    @Column(name = "codigo", nullable = false, columnDefinition = "CHAR(6)")
     private String codigo;
     
     @Column(name = "nombre", nullable = false, length = 100)

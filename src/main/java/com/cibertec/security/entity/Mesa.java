@@ -10,14 +10,14 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "mesa")
 public class Mesa {
@@ -25,18 +25,20 @@ public class Mesa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_mesa")
+    @EqualsAndHashCode.Include
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_sucursal")
+    @JoinColumn(name = "id_sucursal", nullable = false)
     private Sucursal sucursal;
 
     @Column(name = "numero_mesa", nullable = false)
     private Integer numeroMesa;
 
+    @JoinColumn(name = "capacidad")
     private Integer capacidad;
 
     @ManyToOne
-    @JoinColumn(name = "id_estado")
+    @JoinColumn(name = "id_estado", nullable = false)
     private Estado estado;
 }

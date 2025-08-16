@@ -9,6 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,10 +17,9 @@ import lombok.Setter;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "menu")
 public class Menu {
@@ -27,9 +27,10 @@ public class Menu {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_platillo")
+    @EqualsAndHashCode.Include
     private Long id;
     
-    @Column(name = "codigo", nullable = false, columnDefinition = "CHAR(8)")
+    @Column(name = "codigo", nullable = false, columnDefinition = "CHAR(6)")
     private String codigo;
 
     @Column(name = "nombre", nullable = false, length = 100)
@@ -42,7 +43,7 @@ public class Menu {
     @JoinColumn(name = "id_categoria", nullable = false)
     private Categoria categoria;
 
-    @Column(nullable = false)
+    @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal precio;
 
     @Column(name = "tiempo_preparacion")
@@ -56,6 +57,7 @@ public class Menu {
 
     @Column(name = "fecha_registro")
     private LocalDateTime fechaRegistro;
-
+    
+    @Column(name = "estado")
     private Boolean estado;
 }

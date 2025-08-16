@@ -4,5 +4,5 @@ import com.cibertec.security.entity.Rol;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface RolRepository extends JpaRepository<Rol, Integer> {
-	Rol findByDescripcion(String descripcion);
+    Rol findByDescripcion(String descripcion);
 }
