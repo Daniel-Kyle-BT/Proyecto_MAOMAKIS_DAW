@@ -5,6 +5,7 @@ import com.cibertec.security.entity.Empleado;
 import jakarta.transaction.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -12,6 +13,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface EmpleadoRepository extends JpaRepository<Empleado, Long> {
+	
+	@Query("SELECT e FROM Empleado e WHERE e.codigo = :codigoEmpleado")
+	Optional<Empleado> findByCodigo(@Param("codigoEmpleado")String codigoEmpleado);
 	
 	@Modifying
 	@Transactional

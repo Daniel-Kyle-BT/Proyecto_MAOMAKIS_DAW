@@ -114,11 +114,12 @@ INSERT INTO caja (codigo, id_sucursal, id_estado) VALUES
 -- ============================================
 INSERT INTO cargo_empleado (descripcion) VALUES
 ('Administrador'),
+('Supervisor'),
 ('Cajero'),
 ('Mesero'),
 ('Cocinero'),
-('Repartidor'),
-('Supervisor');
+('Repartidor');
+
 
 -- ============================================
 -- CLIENTES (6 registros)

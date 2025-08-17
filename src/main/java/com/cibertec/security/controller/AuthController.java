@@ -7,6 +7,7 @@ import com.cibertec.security.service.UsuarioService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.springframework.http.*;
 import org.springframework.security.authentication.*;
@@ -40,10 +41,18 @@ public class AuthController {
         return ResponseEntity.ok(Map.of("token", token));
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<Usuario> register(@RequestBody Usuario usuario) {
-        var saved = usuarioService.registrarUsuario(usuario);
-        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    @PostMapping("/register/{codigoEmpleado}")
+    public ResponseEntity<?> register(@RequestBody Usuario usuario, @PathVariable  String codigoEmpleado) {
+        try {
+            Usuario saved = usuarioService.registrarUsuario(usuario, codigoEmpleado);
+            return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Empleado no encontrado");
+        } catch (SecurityException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Empleado no autorizado para registrarse");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
     
     @GetMapping("/usuarios")

@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -29,7 +30,7 @@ public class Comprobante {
     @EqualsAndHashCode.Include
     private Long idComprobante;
 
-    @Column(name= "fecha_emision")
+    @Column(name= "fecha_emision", updatable = false)
     private LocalDateTime fechaEmision;
     
     @Column(name= "precio_total_pedido", precision = 10, scale = 2)
@@ -64,4 +65,9 @@ public class Comprobante {
     @ManyToOne
     @JoinColumn(name = "id_estado", nullable = false)
     private Estado estado;
+    
+    @PrePersist
+    public void prePersist() {
+        this.fechaEmision = LocalDateTime.now();
+    }
 }

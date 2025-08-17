@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -50,9 +51,14 @@ public class Usuario {
     @Column(name = "restablecer")
     private Boolean restablecer = true;
 
-    @Column(name = "fecha_registro")
+    @Column(name = "fecha_registro", updatable = false)
     private LocalDateTime fechaRegistro;
 
     @Column(name = "estado")
     private Boolean estado = true;
+    
+    @PrePersist
+    public void prePersist() {
+        this.fechaRegistro = LocalDateTime.now();
+    }
 }
