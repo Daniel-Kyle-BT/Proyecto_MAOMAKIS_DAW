@@ -118,7 +118,7 @@ INSERT INTO cargo_empleado (descripcion) VALUES
 ('Cajero'),
 ('Mesero'),
 ('Cocinero'),
-('Repartidor'),
+('Repartidor');
 
 
 -- ============================================
