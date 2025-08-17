@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -55,9 +56,14 @@ public class Menu {
     @Column(name = "nombre_imagen")
     private String nombreImagen;
 
-    @Column(name = "fecha_registro")
+    @Column(name = "fecha_registro", updatable = false)
     private LocalDateTime fechaRegistro;
     
     @Column(name = "estado")
     private Boolean estado;
+    
+    @PrePersist
+    public void prePersist() {
+        this.fechaRegistro = LocalDateTime.now();
+    }
 }

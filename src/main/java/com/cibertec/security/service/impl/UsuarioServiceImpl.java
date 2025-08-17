@@ -1,13 +1,15 @@
 package com.cibertec.security.service.impl;
 
 import com.cibertec.security.entity.Usuario;
-import com.cibertec.security.entity.Rol;
+import com.cibertec.security.entity.Empleado;
 import com.cibertec.security.repository.UsuarioRepository;
+import com.cibertec.security.repository.EmpleadoRepository;
 import com.cibertec.security.repository.RolRepository;
 import com.cibertec.security.service.UsuarioService;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.security.core.userdetails.*;
@@ -21,14 +23,18 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
     private final UsuarioRepository usuarioRepository;
     private final RolRepository rolRepository;
     private final PasswordEncoder passwordEncoder;
+    
+    private final  EmpleadoRepository empleadoRepository;
 
     public UsuarioServiceImpl(UsuarioRepository usuarioRepository,
                               RolRepository rolRepository,
-                              PasswordEncoder passwordEncoder) {
+                              PasswordEncoder passwordEncoder,
+                              EmpleadoRepository empleadoRepository) {
         this.usuarioRepository = usuarioRepository;
         this.rolRepository = rolRepository;
         this.passwordEncoder = passwordEncoder;
-    }
+        this.empleadoRepository = empleadoRepository;
+    } 
 
     @Override
     public Optional<Usuario> buscarPorUsername(String username) {
@@ -36,14 +42,23 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
     }
 
     @Override
-    public Usuario registrarUsuario(Usuario usuario) {
+    public Usuario registrarUsuario(Usuario usuario, String codigoEmpleado) {
         if (usuarioRepository.existsByUsername(usuario.getUsername())) {
-            throw new IllegalArgumentException("username ya existe");
+            throw new IllegalArgumentException("Username ya existe");
         }
+
+        Empleado empleado = empleadoRepository.findByCodigo(codigoEmpleado)
+        		.orElseThrow(() -> new NoSuchElementException("Empleado no encontrado"));
+        
+        if (empleado.getCargo().getId() > 4) {
+            throw new SecurityException("Cargo no autorizado");
+        }
+    	
+    	usuario.setEmpleado(empleado);
+        usuario.setRol(rolRepository.findById(empleado.getCargo().getId())
+                .orElseThrow(() -> new NoSuchElementException("Rol no encontrado")));
         usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
-        /*Rol rolUser = rolRepository.findByDescripcion("USER");
-        usuario.setRol(rolUser);*/
-        usuario.setEstado(true);
+        
         return usuarioRepository.save(usuario);
     }
 

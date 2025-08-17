@@ -9,7 +9,7 @@ public interface UsuarioService {
 
     Optional<Usuario> buscarPorUsername(String username);
     
-    Usuario registrarUsuario(Usuario usuario);
+    Usuario registrarUsuario(Usuario usuario, String codigoEmpleado);
     
     List<Usuario> listarUsuarios();
 }

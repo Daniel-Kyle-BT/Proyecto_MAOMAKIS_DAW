@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -40,9 +41,14 @@ public class Cliente {
     @Column(name = "telefono", length = 15)
     private String telefono;
 
-    @Column(name = "fecha_registro")
+    @Column(name = "fecha_registro", updatable = false)
     private LocalDateTime fechaRegistro;
 
     @Column(name = "estado")
     private Boolean estado = true;
+    
+    @PrePersist
+    public void prePersist() {
+        this.fechaRegistro = LocalDateTime.now();
+    }
 }

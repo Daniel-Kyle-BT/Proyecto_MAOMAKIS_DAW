@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -45,7 +46,7 @@ public class Pedido {
     @JoinColumn(name = "id_direccion")
     private DireccionPedido direccion;
 
-    @Column(name = "fecha_inicio")
+    @Column(name = "fecha_inicio", updatable = false)
     private LocalDateTime fechaInicio;
     
     @Column(name = "fecha_fin")
@@ -60,4 +61,9 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "id_estado", nullable = false)
     private Estado estado;
+    
+    @PrePersist
+    public void prePersist() {
+        this.fechaInicio = LocalDateTime.now();
+    }
 }
