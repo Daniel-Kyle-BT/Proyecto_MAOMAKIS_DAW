@@ -11,9 +11,21 @@ import java.util.List;
 
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
-    @Query("SELECT p FROM Pedido p WHERE p.estado.id = :idEstado")
-    List<Pedido> findByEstado(@Param("idEstado") Integer idEstado);
 
-    @Query("SELECT p FROM Pedido p WHERE p.fechaInicio BETWEEN :fechaInicio AND :fechaFin")
-    List<Pedido> findByRangoDeFechas(@Param("fechaInicio") LocalDateTime fechaInicio, @Param("fechaFin") LocalDateTime fechaFin);
+@Query("""
+    SELECT p FROM Pedido p
+    WHERE (:idEmpleado = 0 OR p.empleado.id = :idEmpleado)
+      AND (:idEstado = 0 OR p.estado.id = :idEstado)
+      AND (
+            (:fechaInicio IS NULL OR :fechaFin IS NULL)
+            OR (p.fechaInicio BETWEEN :fechaInicio AND :fechaFin)
+          )
+""")
+List<Pedido> buscarPedidosFiltro(
+    @Param("idEmpleado") Long idEmpleado,
+    @Param("idEstado") Integer idEstado,
+    @Param("fechaInicio") LocalDateTime fechaInicio,
+    @Param("fechaFin") LocalDateTime fechaFin
+);
+
 }

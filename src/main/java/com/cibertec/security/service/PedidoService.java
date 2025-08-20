@@ -12,6 +12,6 @@ public interface PedidoService {
     Optional<Pedido> obtenerPedidoPorId(Long idPedido);
     Pedido guardarPedido(Pedido pedido);
     void eliminarPedido(Long idPedido);
-    List<Pedido> listarPedidosPorEstado(Integer idEstado);
-    List<Pedido> listarPedidosPorRangoDeFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin);
+List<Pedido> buscarPedidosFiltro(Long idEmpleado, Integer idEstado, LocalDateTime fechaInicio, LocalDateTime fechaFin);
+
 }

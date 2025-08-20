@@ -36,13 +36,8 @@ public class CajaServiceImpl implements CajaService {
         cajaRepository.deleteById(idCaja);
     }
 
-    @Override
-    public List<Caja> listarCajasPorSucursal(Integer idSucursal) {
-        return cajaRepository.findBySucursal(idSucursal);
-    }
-
-    @Override
-    public List<Caja> listarCajasPorEstado(Integer idEstado) {
-        return cajaRepository.findByEstado(idEstado);
-    }
+	@Override
+	public List<Caja> buscarCajasFiltro(Integer idSucursal, Integer idEstado) {
+	    return cajaRepository.buscarCajasFiltro(idSucursal, idEstado);
+	}
 }

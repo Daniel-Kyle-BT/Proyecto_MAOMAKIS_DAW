@@ -12,6 +12,5 @@ public interface ComprobanteService {
     Optional<Comprobante> obtenerComprobantePorId(Long idComprobante);
     Comprobante guardarComprobante(Comprobante comprobante);
     void eliminarComprobante(Long idComprobante);
-    List<Comprobante> listarComprobantesPorCliente(Long idCliente);
-    List<Comprobante> listarComprobantesPorRangoDeFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin);
+List<Comprobante> buscarComprobantesFiltro(Long idPedido, Long idCliente, Long idEmpleado, Long idCaja, Long idEstado, LocalDateTime fechaInicio, LocalDateTime fechaFin);
 }

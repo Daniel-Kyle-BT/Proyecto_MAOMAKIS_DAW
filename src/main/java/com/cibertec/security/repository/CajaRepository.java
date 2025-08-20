@@ -10,9 +10,13 @@ import java.util.List;
 
 public interface CajaRepository extends JpaRepository<Caja, Integer> {
 
-    @Query("SELECT c FROM Caja c WHERE c.sucursal.id = :idSucursal")
-    List<Caja> findBySucursal(@Param("idSucursal") Integer idSucursal);
-
-    @Query("SELECT c FROM Caja c WHERE c.estado.id = :idEstado")
-    List<Caja> findByEstado(@Param("idEstado") Integer idEstado);
+@Query("""
+    SELECT c FROM Caja c
+    WHERE (:idSucursal = 0 OR c.sucursal.id = :idSucursal)
+      AND (:idEstado = 0 OR c.estado.id = :idEstado)
+""")
+List<Caja> buscarCajasFiltro(
+    @Param("idSucursal") Integer idSucursal,
+    @Param("idEstado") Integer idEstado
+);
 }

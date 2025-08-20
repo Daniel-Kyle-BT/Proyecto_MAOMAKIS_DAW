@@ -55,13 +55,10 @@ public class CajaController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/sucursal/{idSucursal}")
-    public ResponseEntity<List<Caja>> listarCajasPorSucursal(@PathVariable Integer idSucursal) {
-        return ResponseEntity.ok(cajaService.listarCajasPorSucursal(idSucursal));
-    }
-
-    @GetMapping("/estado/{idEstado}")
-    public ResponseEntity<List<Caja>> listarCajasPorEstado(@PathVariable Integer idEstado) {
-        return ResponseEntity.ok(cajaService.listarCajasPorEstado(idEstado));
-    }
+	@GetMapping("/filtro")
+	public ResponseEntity<List<Caja>> buscarCajasFiltro(
+	        @RequestParam(required = false, defaultValue = "0") Integer idSucursal,
+	        @RequestParam(required = false, defaultValue = "0") Integer idEstado) {
+	    return ResponseEntity.ok(cajaService.buscarCajasFiltro(idSucursal, idEstado));
+	}
 }

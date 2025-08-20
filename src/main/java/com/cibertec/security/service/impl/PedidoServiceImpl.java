@@ -37,13 +37,9 @@ public class PedidoServiceImpl implements PedidoService {
         pedidoRepository.deleteById(idPedido);
     }
 
-    @Override
-    public List<Pedido> listarPedidosPorEstado(Integer idEstado) {
-        return pedidoRepository.findByEstado(idEstado);
-    }
 
-    @Override
-    public List<Pedido> listarPedidosPorRangoDeFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
-        return pedidoRepository.findByRangoDeFechas(fechaInicio, fechaFin);
-    }
+	@Override
+	public List<Pedido> buscarPedidosFiltro(Long idEmpleado, Integer idEstado, LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+	    return pedidoRepository.buscarPedidosFiltro(idEmpleado, idEstado, fechaInicio, fechaFin);
+	}
 }

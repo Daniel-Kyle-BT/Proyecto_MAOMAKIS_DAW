@@ -56,15 +56,15 @@ public class ComprobanteController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/cliente/{idCliente}")
-    public ResponseEntity<List<Comprobante>> listarComprobantesPorCliente(@PathVariable Long idCliente) {
-        return ResponseEntity.ok(comprobanteService.listarComprobantesPorCliente(idCliente));
-    }
-
-    @GetMapping("/fechas")
-    public ResponseEntity<List<Comprobante>> listarComprobantesPorRangoDeFechas(
-            @RequestParam LocalDateTime fechaInicio,
-            @RequestParam LocalDateTime fechaFin) {
-        return ResponseEntity.ok(comprobanteService.listarComprobantesPorRangoDeFechas(fechaInicio, fechaFin));
-    }
+	@GetMapping("/filtro")
+	public ResponseEntity<List<Comprobante>> buscarComprobantesFiltro(
+	        @RequestParam(required = false, defaultValue = "0") Long idPedido,
+	        @RequestParam(required = false, defaultValue = "0") Long idCliente,
+	        @RequestParam(required = false, defaultValue = "0") Long idEmpleado,
+	        @RequestParam(required = false, defaultValue = "0") Long idCaja,
+	        @RequestParam(required = false, defaultValue = "0") Long idEstado,
+	        @RequestParam(required = false) LocalDateTime fechaInicio,
+	        @RequestParam(required = false) LocalDateTime fechaFin) {
+	    return ResponseEntity.ok(comprobanteService.buscarComprobantesFiltro(idPedido, idCliente, idEmpleado, idCaja, idEstado, fechaInicio, fechaFin));
+	}
 }

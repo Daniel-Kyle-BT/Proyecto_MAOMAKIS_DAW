@@ -11,7 +11,5 @@ public interface CajaService {
     Optional<Caja> obtenerCajaPorId(Integer idCaja);
     Caja guardarCaja(Caja caja);
     void eliminarCaja(Integer idCaja);
-
-    List<Caja> listarCajasPorSucursal(Integer idSucursal);
-    List<Caja> listarCajasPorEstado(Integer idEstado);
+List<Caja> buscarCajasFiltro(Integer idSucursal, Integer idEstado);
 }

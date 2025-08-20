@@ -56,15 +56,13 @@ public class PedidoController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/estado/{idEstado}")
-    public ResponseEntity<List<Pedido>> listarPedidosPorEstado(@PathVariable Integer idEstado) {
-        return ResponseEntity.ok(pedidoService.listarPedidosPorEstado(idEstado));
-    }
 
-    @GetMapping("/fechas")
-    public ResponseEntity<List<Pedido>> listarPedidosPorRangoDeFechas(
-            @RequestParam LocalDateTime fechaInicio,
-            @RequestParam LocalDateTime fechaFin) {
-        return ResponseEntity.ok(pedidoService.listarPedidosPorRangoDeFechas(fechaInicio, fechaFin));
-    }
+	@GetMapping("/filtro")
+	public ResponseEntity<List<Pedido>> buscarPedidosFiltro(
+	        @RequestParam(required = false, defaultValue = "0") Long idEmpleado,
+	        @RequestParam(required = false, defaultValue = "0") Integer idEstado,
+	        @RequestParam(required = false) LocalDateTime fechaInicio,
+	        @RequestParam(required = false) LocalDateTime fechaFin) {
+	    return ResponseEntity.ok(pedidoService.buscarPedidosFiltro(idEmpleado, idEstado, fechaInicio, fechaFin));
+	}
 }

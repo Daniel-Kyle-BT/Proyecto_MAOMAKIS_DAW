@@ -37,13 +37,9 @@ public class ComprobanteServiceImpl implements ComprobanteService {
         comprobanteRepository.deleteById(idComprobante);
     }
 
-    @Override
-    public List<Comprobante> listarComprobantesPorCliente(Long idCliente) {
-        return comprobanteRepository.findByCliente(idCliente);
-    }
+	@Override
+	public List<Comprobante> buscarComprobantesFiltro(Long idPedido, Long idCliente, Long idEmpleado, Long idCaja, Long idEstado, LocalDateTime fechaInicio, LocalDateTime fechaFin) {
+	    return comprobanteRepository.buscarComprobantesFiltro(idPedido, idCliente, idEmpleado, idCaja, idEstado, fechaInicio, fechaFin);
+	}
 
-    @Override
-    public List<Comprobante> listarComprobantesPorRangoDeFechas(LocalDateTime fechaInicio, LocalDateTime fechaFin) {
-        return comprobanteRepository.findByRangoDeFechas(fechaInicio, fechaFin);
-    }
 }
