@@ -10,6 +10,15 @@ import org.springframework.data.repository.query.Param;
 
 public interface DistritoRepository extends JpaRepository<Distrito, Long> {
 
-	@Query("SELECT e FROM Distrito e WHERE e.provincia.id = :idProvincia")
-	List<Distrito> buscarDistritoPorProvincia(@Param("idProvincia") Integer idProvincia);
+
+@Query("""
+    SELECT d FROM Distrito d
+    WHERE (:idProvincia = 0 OR d.provincia.id = :idProvincia)
+      AND (:descripcion IS NULL OR LOWER(d.descripcion) LIKE LOWER(CONCAT('%', :descripcion, '%')))
+""")
+List<Distrito> buscarDistritosFiltro(
+    @Param("idProvincia") Integer idProvincia,
+    @Param("descripcion") String descripcion
+);
+
 }
