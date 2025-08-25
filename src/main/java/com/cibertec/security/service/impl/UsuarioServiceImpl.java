@@ -40,16 +40,26 @@ public class UsuarioServiceImpl implements UsuarioService, UserDetailsService {
     public Optional<Usuario> buscarPorUsername(String username) {
         return usuarioRepository.findByUsername(username);
     }
+    
+    public Usuario obtenerUsuarioConEmpleadoYRol(String username) {
+        return usuarioRepository.findByUsername(username)
+            .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado"));
+    }
 
     @Override
     public Usuario registrarUsuario(Usuario usuario, String codigoEmpleado) {
-        if (usuarioRepository.existsByUsername(usuario.getUsername())) {
-            throw new IllegalArgumentException("Username ya existe");
-        }
 
         Empleado empleado = empleadoRepository.findByCodigo(codigoEmpleado)
-        		.orElseThrow(() -> new NoSuchElementException("Empleado no encontrado"));
+        		.orElseThrow(() -> new NoSuchElementException("Codigo de Empleado no existente"));
         
+        if (usuarioRepository.existsByEmpleado(empleado)) {
+            throw new IllegalArgumentException("El empleado ya tiene un usuario registrado");
+        }
+                
+        if (usuarioRepository.existsByUsername(usuario.getUsername())) {
+            throw new IllegalArgumentException("El nombre de usuario ya está en uso");
+        }
+
         if (empleado.getCargo().getId() > 4) {
             throw new SecurityException("Cargo no autorizado");
         }
