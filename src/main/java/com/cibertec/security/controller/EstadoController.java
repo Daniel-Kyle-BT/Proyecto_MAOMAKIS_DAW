@@ -22,7 +22,7 @@ public class EstadoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Estado> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<Estado> buscarPorId(@PathVariable Integer id) {
         Estado estado = estadoService.buscarPorId(id);
         return estado != null ? ResponseEntity.ok(estado) : ResponseEntity.notFound().build();
     }
@@ -33,7 +33,7 @@ public class EstadoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> eliminar(@PathVariable Long id) {
+    public ResponseEntity<Void> eliminar(@PathVariable Integer id) {
         estadoService.eliminar(id);
         return ResponseEntity.noContent().build();
     }

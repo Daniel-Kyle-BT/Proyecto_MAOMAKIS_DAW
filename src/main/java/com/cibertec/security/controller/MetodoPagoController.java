@@ -46,7 +46,7 @@ public class MetodoPagoController {
     @PutMapping("/{id}")
     public ResponseEntity<MetodoPago> actualizar(@PathVariable Integer id, @RequestBody MetodoPago metodoPago) {
         return metodoPagoService.obtenerPorId(id).map(m -> {
-            metodoPago.setIdMetodoPago(id);
+            metodoPago.setId(id);
             return ResponseEntity.ok(metodoPagoService.actualizar(metodoPago));
         }).orElse(ResponseEntity.notFound().build());
     }
