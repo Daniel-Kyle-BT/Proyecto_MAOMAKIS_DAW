@@ -23,7 +23,7 @@ public class MetodoPago {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_metodo_pago")
     @EqualsAndHashCode.Include
-    private Integer idMetodoPago;
+    private Integer id;
 
     @Column(nullable = false, length = 100)
     private String descripcion;

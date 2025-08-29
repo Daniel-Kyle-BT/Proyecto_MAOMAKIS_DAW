@@ -26,7 +26,7 @@ public class Estado {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_estado")
     @EqualsAndHashCode.Include
-    private Integer idEstado;
+    private Integer id;
 
     @Column(name = "descripcion", nullable = false, length = 50)
     private String descripcion;

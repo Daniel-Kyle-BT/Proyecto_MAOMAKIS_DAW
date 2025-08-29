@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cibertec.security.dto.SucursalDTO;
 import com.cibertec.security.entity.Sucursal;
 import com.cibertec.security.repository.SucursalRepository;
 import com.cibertec.security.service.SucursalService;
@@ -19,6 +20,14 @@ public class SucursalServiceImpl implements SucursalService{
 	public List<Sucursal> listar() {
 		// TODO Auto-generated method stub
 		return sucursalRepository.findAll();
+	}
+	
+	@Override
+	public List<SucursalDTO> listarDTO() {
+	    return sucursalRepository.findAll()
+	            .stream()
+	            .map(s -> new SucursalDTO(s.getId(), s.getNombre()))
+	            .toList();
 	}
 
 	@Override

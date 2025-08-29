@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cibertec.security.dto.SucursalDTO;
 import com.cibertec.security.entity.Sucursal;
 import com.cibertec.security.service.SucursalService;
 
@@ -25,8 +26,8 @@ public class SucursalController {
 	    private SucursalService sucursalService;
 
 	    @GetMapping
-	    public List<Sucursal> listar() {
-	        return sucursalService.listar();
+	    public List<SucursalDTO> listar() {
+	        return sucursalService.listarDTO();
 	    }
 
 	    @GetMapping("/{id}")
