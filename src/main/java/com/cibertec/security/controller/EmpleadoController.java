@@ -28,19 +28,15 @@ public class EmpleadoController {
     @Autowired
     private EmpleadoService empleadoService;
 
-    @GetMapping
-    public ResponseEntity<List<Empleado>> listarEmpleados(
-            @RequestParam(defaultValue = "true") boolean estado,
-            @RequestParam(defaultValue = "0") int idCargo,
-            @RequestParam(defaultValue = "0") int idDistrito,
-            @RequestParam(defaultValue = "0") int idProvincia,
-            @RequestParam(defaultValue = "0") int idDepartamento) {
+	@GetMapping
+	public ResponseEntity<List<Empleado>> listarEmpleados(@RequestParam(defaultValue = "0") int idCargo,
+			@RequestParam(defaultValue = "0") int idDistrito, @RequestParam(defaultValue = "0") int idProvincia,
+			@RequestParam(defaultValue = "0") int idDepartamento, @RequestParam(defaultValue = "true") boolean estado) {
 
-        List<Empleado> empleados = empleadoService.listarEmpleadoPorFiltros(
-                estado, idCargo, idDistrito, idProvincia, idDepartamento
-        );
-        return ResponseEntity.ok(empleados);
-    }
+		List<Empleado> empleados = empleadoService.listarEmpleadoPorFiltros(estado, idCargo, idDistrito, idProvincia,
+				idDepartamento);
+		return ResponseEntity.ok(empleados);
+	}
 
     @PostMapping
     public ResponseEntity<Empleado> crearEmpleado(@RequestBody Empleado empleado) {

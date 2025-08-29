@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface EstadoService {
     List<Estado> listarTodos();
-    Estado buscarPorId(Long id);
+    Estado buscarPorId(Integer id);
     Estado guardar(Estado estado);
-    void eliminar(Long id);
+    void eliminar(Integer id);
 }

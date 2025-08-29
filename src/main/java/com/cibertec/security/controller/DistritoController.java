@@ -17,6 +17,13 @@ public class DistritoController {
     private DistritoService distritoService;
 
     @GetMapping
+    public ResponseEntity<List<Distrito>> buscarDistritosFiltro(
+            @RequestParam(required = false, defaultValue = "0") Integer idProvincia,
+            @RequestParam(required = false) String descripcion) {//opcional
+        return ResponseEntity.ok(distritoService.buscarDistritosFiltro(idProvincia, descripcion));
+    }
+    
+    @GetMapping("/lista")
     public ResponseEntity<List<Distrito>> listarTodos() {
         return ResponseEntity.ok(distritoService.listarTodos());
     }
@@ -38,10 +45,4 @@ public class DistritoController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/filtro")
-    public ResponseEntity<List<Distrito>> buscarDistritosFiltro(
-            @RequestParam(required = false, defaultValue = "0") Integer idProvincia,
-            @RequestParam(required = false) String descripcion) {
-        return ResponseEntity.ok(distritoService.buscarDistritosFiltro(idProvincia, descripcion));
-    }
 }

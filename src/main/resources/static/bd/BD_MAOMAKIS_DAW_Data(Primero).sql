@@ -3,11 +3,11 @@ USE BD_MAOMAKIS_BT;
 -- ESTADO (ejemplo genérico)
 -- ============================================
 INSERT INTO estado (descripcion) VALUES
-('Activo'),
-('Inactivo'),
-('Ocupado'),
-('Libre'),
-('Pendiente');
+('Pendiente'),
+('Emitido'),
+('Entegado'),
+('Cancelado'),
+('Pagado');
 
 -- ============================================
 -- DEPARTAMENTOS (4 registros)

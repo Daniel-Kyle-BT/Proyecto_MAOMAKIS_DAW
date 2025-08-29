@@ -21,7 +21,7 @@ public class EstadoServiceImpl implements EstadoService {
     }
 
     @Override
-    public Estado buscarPorId(Long id) {
+    public Estado buscarPorId(Integer id) {
         return estadoRepository.findById(id).orElse(null);
     }
 
@@ -31,7 +31,7 @@ public class EstadoServiceImpl implements EstadoService {
     }
 
     @Override
-    public void eliminar(Long id) {
+    public void eliminar(Integer id) {
         estadoRepository.deleteById(id);
     }
 }

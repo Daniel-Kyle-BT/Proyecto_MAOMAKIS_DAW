@@ -28,6 +28,8 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                     .requestMatchers("/api/auth/**").permitAll()
+                    .requestMatchers("/img/menu/**").permitAll() // <-- Haz pública la carpeta img
+                    .requestMatchers("/api/upload/**").permitAll() // <-- guardado de imagenes
                     .anyRequest().authenticated()
             )
             .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

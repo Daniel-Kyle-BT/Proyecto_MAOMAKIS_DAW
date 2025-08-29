@@ -6,19 +6,19 @@ USE BD_MAOMAKIS_BT;
 -- ============================================
 INSERT INTO empleado (codigo, nombre, apellido, id_distrito, dni, id_cargo, telefono, estado) VALUES
 -- Distrito 1
-('EMP001', 'Luis', 'García', 1, '20000001', 1, '910000001', 1),
-('EMP002', 'Sofía', 'Martínez', 1, '20000002', 2, '910000002', 1),
-('EMP003', 'Andrés', 'Rojas', 1, '20000003', 3, '910000003', 1),
+('EMP001', 'Daniel', 'Bolaños Tapia', 1, '20000001', 1, '910000001', 1),
+('EMP002', 'Alvaro', 'Paja Trujillo', 1, '20000002', 1, '910000002', 1),
+('EMP003', 'Fernanda', 'Barba Oviedo ', 1, '20000003', 1, '910000003', 1),
 
 -- Distrito 2
-('EMP004', 'Diego', 'Ramírez', 2, '20000004', 1, '910000004', 1),
-('EMP005', 'Camila', 'Flores', 2, '20000005', 2, '910000005', 1),
-('EMP006', 'Martín', 'Reyes', 2, '20000006', 3, '910000006', 1),
+('EMP004', 'Diego', 'Mendoza Cuevas', 2, '20000004', 1, '910000004', 1),
+('EMP005', 'Camila', 'Flores Aguilar', 2, '20000005', 2, '910000005', 1),
+('EMP006', 'Martín', 'Reyes de la Torre', 2, '20000006', 3, '910000006', 1),
 
 -- Distrito 3
-('EMP007', 'Jorge', 'Mendoza', 3, '20000007', 1, '910000007', 1),
-('EMP008', 'Elena', 'Quispe', 3, '20000008', 2, '910000008', 1),
-('EMP009', 'Ricardo', 'Huamán', 3, '20000009', 3, '910000009', 1),
+('EMP007', 'Jorge', 'Espinoza Mendoza', 3, '20000007', 4, '910000007', 1),
+('EMP008', 'Elena', 'Quispe Campusano', 3, '20000008', 5, '910000008', 1),
+('EMP009', 'Ricardo', 'Huamán Soto', 3, '20000009', 6, '910000009', 1),
 
 -- Distrito 4
 ('EMP010', 'Fernando', 'Chávez', 4, '20000010', 1, '910000010', 1),
@@ -172,13 +172,13 @@ INSERT INTO empleado (codigo, nombre, apellido, id_distrito, dni, id_cargo, tele
 -- id_rol: 1=Administrador, 2=Supervisor, 3=Cajero, 4=Mesero
 -- ============================================
 INSERT INTO usuario (id_empleado, id_rol, correo, username, password, restablecer, estado) VALUES
-(1, 1, 'admin00@maomakis.pe', 'DKBT', '$2a$12$HclG2HBzLVRLAJl1Foj2BeO5nujLVwWkPp2HhFBX1vQwWK7bUra.W', 0, 1),
-(2, 2, 'super01@maomakis.pe', 'ADMIN', '$2a$12$HclG2HBzLVRLAJl1Foj2BeO5nujLVwWkPp2HhFBX1vQwWK7bUra.W', 1, 1),
-(3, 3, 'cajero01@maomakis.pe', 'cajero01', '$2a$12$HclG2HBzLVRLAJl1Foj2BeO5nujLVwWkPp2HhFBX1vQwWK7bUra.W', 1, 1),
-(4, 4, 'mesero01@maomakis.pe', 'mesero01', '$2a$12$HclG2HBzLVRLAJl1Foj2BeO5nujLVwWkPp2HhFBX1vQwWK7bUra.W', 1, 1),
-(5, 3, 'cajero02@maomakis.pe', 'cajero02', '$2a$12$HclG2HBzLVRLAJl1Foj2BeO5nujLVwWkPp2HhFBX1vQwWK7bUra.W', 1, 1),
-(6, 4, 'mesero02@maomakis.pe', 'mesero02', '$2a$12$HclG2HBzLVRLAJl1Foj2BeO5nujLVwWkPp2HhFBX1vQwWK7bUra.W', 1, 1),
-(7, 2, 'super02@maomakis.pe', 'super02', '$2a$12$HclG2HBzLVRLAJl1Foj2BeO5nujLVwWkPp2HhFBX1vQwWK7bUra.W', 1, 1),
+(1, 1, 'admin00@maomakis.pe', 'DKBT', '$2a$12$HclG2HBzLVRLAJl1Foj2BeO5nujLVwWkPp2HhFBX1vQwWK7bUra.W', 1, 1),
+(2, 2, 'super01@maomakis.pe', 'ALVARO', '$2a$12$HclG2HBzLVRLAJl1Foj2BeO5nujLVwWkPp2HhFBX1vQwWK7bUra.W', 1, 1),
+(3, 3, 'cajero01@maomakis.pe', 'FFERRN', '$2a$12$HclG2HBzLVRLAJl1Foj2BeO5nujLVwWkPp2HhFBX1vQwWK7bUra.W', 1, 1),
+(4, 4, 'mesero01@maomakis.pe', 'BENJADMC', '$2a$12$HclG2HBzLVRLAJl1Foj2BeO5nujLVwWkPp2HhFBX1vQwWK7bUra.W', 1, 1),
+(5, 3, 'cajero02@maomakis.pe', 'SUPER', '$2a$12$HclG2HBzLVRLAJl1Foj2BeO5nujLVwWkPp2HhFBX1vQwWK7bUra.W', 1, 1),
+(6, 4, 'mesero02@maomakis.pe', 'CAJERO', '$2a$12$HclG2HBzLVRLAJl1Foj2BeO5nujLVwWkPp2HhFBX1vQwWK7bUra.W', 1, 1),
+(7, 2, 'super02@maomakis.pe', 'MESERO', '$2a$12$HclG2HBzLVRLAJl1Foj2BeO5nujLVwWkPp2HhFBX1vQwWK7bUra.W', 1, 1),
 (8, 4, 'mesero03@maomakis.pe', 'mesero03', '$2a$12$HclG2HBzLVRLAJl1Foj2BeO5nujLVwWkPp2HhFBX1vQwWK7bUra.W', 1, 1);
 
 
